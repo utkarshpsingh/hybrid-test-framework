@@ -1,0 +1,323 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.test.maven</groupId>
+	<artifactId>hybrid-test-framework</artifactId>
+	<version>0.4.2</version>
+	<name>hybrid-test-framework</name>
+	<packaging>jar</packaging>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub anishohriTrepp Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/Trepp/hydra-test-framework</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>github</id>
+			<name>GitHub anishohriTrepp Apache Maven Packages-Snapshot</name>
+			<url>https://maven.pkg.github.com/Trepp/hydra-test-framework</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+
+	<properties>
+
+		<selenium.version>3.141.0</selenium.version>
+
+
+	</properties>
+
+
+
+
+	<build>
+
+		<!-- Source directory configuration -->
+
+		<sourceDirectory>src</sourceDirectory>
+
+
+		<pluginManagement>
+			<plugins>
+
+				<!-- Following plugin executes the testng tests -->
+
+				<plugin>
+
+					<groupId>org.apache.maven.plugins</groupId>
+
+					<artifactId>maven-surefire-plugin</artifactId>
+
+					<version>2.12.2</version>
+
+					<configuration>
+						<printSummary>true</printSummary>
+						<!-- Suite testng xml file to consider for test execution -->
+
+						<suiteXmlFiles>
+
+
+							<suiteXmlFile>testngconfig/testng.xml</suiteXmlFile>
+
+						</suiteXmlFiles>
+
+					</configuration>
+
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<!-- http://maven.apache.org/plugins/maven-compiler-plugin/ -->
+						<source>8</source>
+						<target>8</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>7.4.5.v20110725</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.9.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>maven-3</id>
+			<activation>
+				<file>
+					<!-- This employs that the basedir expression is only recognized by 
+						Maven 3.x (see MNG-2363) -->
+					<exists>${basedir}</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-descriptor</id>
+								<goals>
+									<goal>attach-descriptor</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+
+	<dependencies>
+
+
+		<dependency>
+
+			<groupId>org.seleniumhq.selenium</groupId>
+
+			<artifactId>selenium-firefox-driver</artifactId>
+
+			<version>${selenium.version}</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.seleniumhq.selenium</groupId>
+
+			<artifactId>selenium-server</artifactId>
+
+			<version>${selenium.version}</version>
+
+		</dependency>
+
+
+
+
+		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			<version>2.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>3.3.0</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+
+
+
+		<dependency>
+
+			<groupId>org.seleniumhq.selenium</groupId>
+
+			<artifactId>selenium-java</artifactId>
+
+			<version>${selenium.version}</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.seleniumhq.selenium</groupId>
+
+			<artifactId>selenium-safari-driver</artifactId>
+
+			<version>${selenium.version}</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>junit</groupId>
+
+			<artifactId>junit</artifactId>
+
+			<version>4.13.1</version>
+
+			<scope>test</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<artifactId>selenium-api</artifactId>
+
+			<groupId>org.seleniumhq.selenium</groupId>
+
+			<type>jar</type>
+
+			<version>${selenium.version}</version>
+
+		</dependency>
+
+
+		<dependency>
+
+			<groupId>org.apache.poi</groupId>
+
+			<artifactId>poi</artifactId>
+
+			<version>4.1.2</version>
+
+		</dependency>
+
+
+		<dependency>
+
+			<groupId>org.apache.poi</groupId>
+
+			<artifactId>poi-ooxml</artifactId>
+
+			<version>4.1.2</version>
+
+
+
+		</dependency>
+
+
+
+
+
+
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.0-jre</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.5.13</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.3.0</version>
+
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.6.3</version>
+		</dependency>
+
+
+
+	</dependencies>
+
+
+
+
+</project>
