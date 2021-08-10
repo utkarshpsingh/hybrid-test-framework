@@ -30,6 +30,7 @@ import org.testng.annotations.Parameters;
 import com.newdemo.framework.controller.ApplicationController;
 
 public class BaseSetupClass {
+	
 	Properties objProperties = new Properties();
 	{
 		try {
@@ -184,7 +185,7 @@ public class BaseSetupClass {
 				localDriver.manage().window().maximize();
 			}
 			if (OS.indexOf("mac") >= 0) {
-				// localDriver.manage().window().fullscreen();
+				localDriver.manage().window().fullscreen();
 			}
 		}
 		setDriver(localDriver);

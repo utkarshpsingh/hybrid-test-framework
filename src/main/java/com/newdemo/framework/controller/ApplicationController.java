@@ -1,6 +1,7 @@
 package com.newdemo.framework.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.openqa.selenium.WebDriver;
 
@@ -19,6 +20,7 @@ public class ApplicationController
 
 	//====================CONTROLLER OBJECTS=======================
 
+	public HashMap <String, Object> getData;
 	public String strParametersNValues = "";
 	public String strMainParametersNValues = "";
 	public LoginController login = null;
@@ -41,7 +43,7 @@ public class ApplicationController
 			login = new LoginController(driver);
 			
 		}
-		login.loginData= new LoginData(strParametersNValues);
+		login.loginData= new LoginData(strParametersNValues,getData);
 
 		return login;
 	}

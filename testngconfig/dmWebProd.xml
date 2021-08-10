@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="AutomationDemo-Production" verbose="1" parallel="tests" thread-count="1">
+	<parameter name="Execute" value="local" />
+	<parameter name="remoteurl"	value="https://xyz@hub.lambdatest.com/wd/hub" />
+	<parameter name="environment" value="Production" />
+
+
+	<test name="Login Functionality Verification" preserveorder="true">
+		<parameter name="capabilities"
+			value="browserName:chrome;platform:Windows 10;version:87.0;name:Login Functionality Verification;build:Demo Web Full Regression PROD;resolution:1440x900" />
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName=>Demo" />
+			<class name="com.newdemo.steps.logInTest" />
+		</classes>
+	</test>
+
+
+
+	<!-- <listeners> <listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener> 
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener> 
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener> 
+		</listeners> -->
+
+
+</suite>

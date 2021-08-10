@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="DM-API AutomationTestSuit-Production" verbose="3" parallel="tests" thread-count="1">
+	<parameter name="Execute" value="cloud" />
+	<parameter name="remoteurl"	value="https://utkarsh.singh:BvmdXybxDNxQjiGOSa69e3b4o0fqefjRKxZ1eoqy0bgSrAX7HF@hub.lambdatest.com/wd/hub" />
+	<parameter name="environment" value="Production" />
+
+
+	<test name="API Loan Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForLoan" />
+		</classes>
+	</test>
+
+
+	<test name="API Scenario Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForScenario" />
+		</classes>
+	</test>
+
+
+	<test name="API PdDial Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForPdDial" />
+		</classes>
+	</test>
+
+
+	<test name="API Price NOI Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForPriceNOI" />
+		</classes>
+	</test>
+
+
+	<test name="API Prepayment Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForPrepayment" />
+		</classes>
+	</test>
+	
+	
+	<test name="API Model Version Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForModelVersion" />
+		</classes>
+	</test>
+
+
+	<test name="API RefiGap Schema Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForRefiGap" />
+		</classes>
+	</test>
+
+
+	<test name="API Mean Reversion Schema Validation"
+		preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifySchemaValidationForMeanReversion" />
+		</classes>
+	</test>
+
+
+	<test name="API Loan Business Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyBusinessValidationForLoan" />
+		</classes>
+	</test>
+
+	<test name="API PdDial Business Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyBusinessValidationForPdDial" />
+		</classes>
+	</test>
+
+
+	<test name="API Prepayment Business Validation"
+		preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyBusinessValidationForPrepayment" />
+		</classes>
+	</test>
+
+
+	<test name="API PriceNOI Business Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyBusinessValidationForPriceNOI" />
+		</classes>
+	</test>
+
+
+	<test name="API RefiGap Business Validation" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyBusinessValidationForRefiGap" />
+		</classes>
+	</test>
+
+
+	<test name="API Calc Request With InValid File"
+		preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class
+				name="com.newdemo.apiTests.verifyResponseWithInvalidJsonFile" />
+		</classes>
+	</test>
+
+
+	<test name="Verify Response With MaxOverrides Payload" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyResponseWithMaxOverrides_payload" />
+		</classes>
+	</test>
+
+
+	<test name="Verify Calc With Benmarked Response PDDial_Grouping" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyCalcWithBenmarkedResponse_PDDialGrouping" />
+		</classes>
+	</test>
+	
+
+	<test name="Verify Calc With Benmarked Response PNOI_Grouping" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyCalcWithBenmarkedResponse_PNOIGrouping" />
+		</classes>
+	</test>
+
+
+	<test name="Verify Calc With Benmarked Response PrepaymentFunding_Grouping" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyCalcWithBenmarkedResponse_PrePayFundingGrouping" />
+		</classes>
+	</test>
+	
+	
+	<test name="Verify Calc With Benmarked Response Prop RefiGap_Grouping" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyCalcWithBenmarkedResponse_PropRefiGapGrouping" />
+		</classes>
+	</test>
+	
+	
+	<test name="Verify Calc With Benmarked Response Mean Reversion_Grouping" preserveorder="true">
+		<classes>
+			<parameter name="ParameterNValue"
+				value="InputDataRow=>2--SheetName2=>API--inputsheet=>Datasheet_Production.xls" />
+			<class name="com.newdemo.apiTests.verifyCalcWithBenmarkedResponse_MeanReversionGrouping" />
+		</classes>
+	</test>
+	
+	
+	
+	
+	
+
+
+</suite>

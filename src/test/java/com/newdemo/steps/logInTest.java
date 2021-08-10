@@ -23,6 +23,6 @@ public class logInTest extends BaseSetupClass
 		Trepp().Login().clickpassword();
 		Trepp().Login().typePassword();
 		Trepp().Login().clickSignin();
-		//Trepp().Login().waitForAnalytics(10);;	
+		
      }
 }
