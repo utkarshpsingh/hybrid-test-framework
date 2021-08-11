@@ -18,6 +18,7 @@
 
 	<listeners>
 		<listener class-name="com.newdemo.framework.report.ExtentReporterNG" />
+		<listener class-name="com.newdemo.framework.rerun.RetryListenerClass" />
 	</listeners>
 
 
