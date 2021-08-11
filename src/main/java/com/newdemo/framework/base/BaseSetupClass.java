@@ -35,7 +35,7 @@ public class BaseSetupClass {
 	{
 		try {
 			objProperties.load(new FileReader(System.getProperty("user.dir") + "/Config/CONFIG.properties"));
-			System.setProperty("atu.reporter.config", System.getProperty("user.dir") + "/Config/ATU.properties");
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,8 +48,7 @@ public class BaseSetupClass {
 	public static String strMainParametersNValues = "";
 	public Utilites commonFunctions = new Utilites();
 
-	// ==========================BROWSER
-	// VARIABLES============================================
+	// ==========================BROWSER VARIABLES============================================
 	public static final String CHROME_DRIVER_KEY = "webdriver.chrome.driver";
 	public static final String IE_DRIVER_KEY = "webdriver.ie.driver";
 	public static final String IE_DRIVER_EXE = "./Lib/IEDriverServer.exe";
@@ -104,7 +103,7 @@ public class BaseSetupClass {
 		System.setProperty("ExectionPlatform", Execute);
 		env = SystemProperties.getProperty("environment", environment);
 		BaseSetupClass.inputFilepath = objProperties.getProperty("InputDatasheetPath");
-		setEnviornment(BaseSetupClass.inputFilepath + "Datasheet_" + env + ".xls");
+		setEnviornment(BaseSetupClass.inputFilepath + "Datasheet_Environment.xls");
 		
 		BaseSetupClass.executionEnv = Execute.toLowerCase();
 
@@ -113,7 +112,6 @@ public class BaseSetupClass {
 		BROWSER selectedBrowser = null;
 		selectedBrowser = BROWSER.valueOf(capMap.get("browserName").toLowerCase());
 
-		// WebDriver localDriver = null;
 		if (Execute.equalsIgnoreCase("cloud")) {
 			DesiredCapabilities caps = new DesiredCapabilities(capMap);
 			caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);

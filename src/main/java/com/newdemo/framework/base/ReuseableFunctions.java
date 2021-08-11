@@ -1,11 +1,6 @@
 package com.newdemo.framework.base;
 
-
-import java.io.BufferedReader;
 import java.io.File;
-
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
@@ -18,23 +13,15 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.Executor;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -44,12 +31,7 @@ public class ReuseableFunctions
 
 	public Properties objCMPProperties = new Properties();
 	public Utilites objUtilitess = new Utilites();
-
-//	private final static AmazonS3 amazonS3Client = AmazonS3ClientBuilder.standard().build();
-
-
 	public String strErrorMsg = "";
-
 
 	public static WebDriver driver;
 	protected JavascriptExecutor JSExecutor;
@@ -58,18 +40,15 @@ public class ReuseableFunctions
 
 	public WebDriverWait wait;
 	
-	
 	public enum waitCondition {
 			toBeVisible, toBeClickable, toBeInvisible, tobePresent
 		}
 	
-//	static Screen s = new Screen();
-	
-	//========================================CONSTRUCTOR FOR COMPONENT REUSABLE FUNCTIONS=================
+	//==============================CONSTRUCTOR FOR COMPONENT REUSABLE FUNCTIONS=================
 	public ReuseableFunctions(WebDriver objTempWebDriver) throws Exception
 	{
 	
-		//==========================INITIALIZE THE WEBDRIVER OBJECT INSIDE COMPONENT REUSABLE FUNCTIONS======
+	//==========================INITIALIZE THE WEBDRIVER OBJECT INSIDE COMPONENT REUSABLE FUNCTIONS======
 	      driver = objTempWebDriver;
 	      JSExecutor = (JavascriptExecutor)driver;
 	      wait = new WebDriverWait(driver,20);
@@ -93,7 +72,6 @@ public class ReuseableFunctions
 	}
 
 	
-	
 	public synchronized Boolean clickObject(WebElement objWebElement, String strObjectName) throws Exception
 	{
 		try
@@ -110,8 +88,6 @@ public class ReuseableFunctions
 			return false;
 		}
 	}
-
-
 	
 	
 	public synchronized Boolean clickObjectJavascript(WebElement objWebElement, String strObjectName) throws Exception
@@ -162,9 +138,6 @@ public class ReuseableFunctions
 	}
 	
 
-
-
-
 	public synchronized Boolean typeValue(WebElement objWebElement, String strObjectName, String strInputValue   ) throws Exception
 
 	{
@@ -183,9 +156,6 @@ public class ReuseableFunctions
 				return false;
 		}
 	}
-	
-	
-
 
 
 	public synchronized Boolean SelectFromDropDown(WebElement objWebElement, String strObjectName, String strValue) throws Exception
@@ -211,6 +181,7 @@ public class ReuseableFunctions
 		}
 	}
 
+	
 	public Boolean SelectFromDropDownVisibleText(WebElement objWebElement, String strObjectName, String strValue) throws Exception
 	{
 		try
@@ -230,6 +201,7 @@ public class ReuseableFunctions
 				return false;
 		}
 	}
+	
 	
 	public Boolean SelectFromDropDownbyindex (WebElement objWebElement, String strObjectName, int strindex) throws Exception
 	{
@@ -251,10 +223,6 @@ public class ReuseableFunctions
 		}
 	}
 	
-	
-
-
-		
 	
 	public synchronized Boolean SelectFromDropDownIndex(WebElement objWebElement, String strObjectName, int strIndex) throws Exception
 	{
@@ -296,10 +264,7 @@ public class ReuseableFunctions
 		}
 	}
 
-	
-
-
-	
+		
 	public synchronized boolean waitForElement(WebElement objWebElement) throws Exception {
 
 		try
@@ -318,7 +283,8 @@ public class ReuseableFunctions
 	
 	}
 	
-public synchronized void waitForElement(waitCondition condition, WebElement element) throws Exception {
+	
+	public synchronized void waitForElement(waitCondition condition, WebElement element) throws Exception {
 		
 		switch (condition) {
 		case tobePresent:
@@ -337,13 +303,7 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 			break;
 		}		
 	}
-	
-
-	
-	
-	
-	
-	
+		
 
 	public By getLocatorFromElement(WebElement element) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
@@ -353,7 +313,8 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 		return (By) findBy;
 		
 	}
-		
+	
+	
 	public synchronized String getText(WebElement objWebElement, String strObjectName, String attributeName) throws Exception
 	{
 		try
@@ -378,10 +339,6 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 	}
 	
 
-	
-	
-
-
 	public synchronized void ElementPresentorEnabled(WebElement objWebElement, String  getStatus, String strObjectName) throws InterruptedException{
         try{
             if(getStatus.equals("Enabled")){
@@ -404,48 +361,46 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 
 	
 	public static void renameDownloadedfiles( String portfolio, String Env, File difference ) throws ScriptException, IOException, InterruptedException {
-	
-		 
+			 
 		 String folderName = System.getProperty("user.dir") + "/Downloads/";
 
-
-	if (difference.exists() ){
-			difference.delete();
-					System.err.println("old difference.csv File deleted");
-	}else {
-						
-	}	
+		if (difference.exists() ){
+				difference.delete();
+						System.err.println("old difference.csv File deleted");
+		}else {
+							
+		}	
+		
+		File[] listFiles = new File(folderName).listFiles();
 	
-	File[] listFiles = new File(folderName).listFiles();
-
-	for (int i = 0; i < listFiles.length; i++) {
-
-	    if (listFiles[i].isFile()) {
-	        String fileName = listFiles[i].getName();
-	        	if (fileName.startsWith("cmbs_loan_by_loan_batch_") && fileName.endsWith(".xlsx")) {
-	        		File file	= new File(folderName + fileName);
-	        			System.out.println(file);
-	        			file.renameTo(new File(folderName + portfolio + "LBL-" + Env + ".xlsx"));
-	        					System.err.println("File Renamed to :" + " " + folderName + portfolio + "LBL-" + Env + ".xlsx");
-	        			
-	        					}else
-	        						
-	        					 if (fileName.startsWith("portfolio_calculator_") && fileName.endsWith(".xlsx")){
-	        						 File file	= new File(folderName + fileName);
-	        		        			System.out.println(file);
-	        		        			file.renameTo(new File(folderName + portfolio + Env + ".xlsx"));
-	        		        			
-	    	        					System.err.println("File Renamed to :" + " " + folderName + portfolio + Env + ".xlsx");
+		for (int i = 0; i < listFiles.length; i++) {
 	
-	        					 }
-	                 
-	    }
-	}
-	
+		    if (listFiles[i].isFile()) {
+		        String fileName = listFiles[i].getName();
+		        	if (fileName.startsWith("cmbs_loan_by_loan_batch_") && fileName.endsWith(".xlsx")) {
+		        		File file	= new File(folderName + fileName);
+		        			System.out.println(file);
+		        			file.renameTo(new File(folderName + portfolio + "LBL-" + Env + ".xlsx"));
+		        					System.err.println("File Renamed to :" + " " + folderName + portfolio + "LBL-" + Env + ".xlsx");
+		        			
+		        					}else
+		        						
+		        					 if (fileName.startsWith("portfolio_calculator_") && fileName.endsWith(".xlsx")){
+		        						 File file	= new File(folderName + fileName);
+		        		        			System.out.println(file);
+		        		        			file.renameTo(new File(folderName + portfolio + Env + ".xlsx"));
+		        		        			
+		    	        					System.err.println("File Renamed to :" + " " + folderName + portfolio + Env + ".xlsx");
+		
+		        					 }
+		                 
+		    }
+		}
+		
 	 }
 
 
- public static void DeleteoldDownloadedfiles( String portfolio, String Env, File difference ) throws ScriptException, IOException, InterruptedException {
+	public static void DeleteoldDownloadedfiles( String portfolio, String Env, File difference ) throws ScriptException, IOException, InterruptedException {
 	
 		 
 		 String folderName = System.getProperty("user.dir") + "/Downloads/";
@@ -487,7 +442,8 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 	
 	 } 
 	 
- public static void convertCSV( ) throws ScriptException, IOException, InterruptedException {
+	
+	public static void convertCSV( ) throws ScriptException, IOException, InterruptedException {
   try {
          CommandLine cmdLine = new CommandLine("python3");
 		 cmdLine.addArgument(System.getProperty("user.dir") + "/Config/test.py");
@@ -508,102 +464,9 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
   		}
 	 
  } 
-	 
-	
-  public static void runpython(String pythonFilePath, File difference ) throws ScriptException, IOException, InterruptedException {
-  
-	
-	 CommandLine cmdLine = new CommandLine("python3");
-	 	cmdLine.addArgument(pythonFilePath);
-	 		DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-
-	 			ExecuteWatchdog watchdog = new ExecuteWatchdog(60*1000);
-	 				Executor executor = new DefaultExecutor();
-	 					executor.setExitValue(1);
-	 						executor.setWatchdog(watchdog);
-	 							executor.execute(cmdLine, resultHandler);
-
-	 
-	                                resultHandler.waitFor();
-	
-	
-	                                	Thread.sleep(5000);
-	
-		    if(difference.exists()){
-				
-				double bytes = difference.length();
-					double kilobytes = (bytes / 1024);
-						double megabytes = (kilobytes / 1024);
-							System.out.println("kilobytes : " + megabytes);
-                   if (kilobytes == 0) {
-                	   System.out.println("No difference in the CSV Found");
-                   } else {
-                	   System.out.println("Difference Found in the CSV, File created at:" +  difference);
-                	  
-                   }
-				
-			}else{
-				 System.out.println("File does not exists!");
-			}
-		    
-		    
-		}
 
 
-  		      /*   public static void ReadfromS3(String BucketName, String Key ) throws IOException {
-      
-        			 S3Object object = amazonS3Client.getObject(BucketName, Key);
-        			      InputStreamReader objectData = new InputStreamReader (object.getObjectContent());
-        			     	BufferedReader reader = new BufferedReader(objectData);
-        			        	System.out.println(reader.lines());
-									objectData.close();
-        }
-
-  		 		
-
-
-  public void sikuliclick(String LocatorImage) throws Exception { 
-	  			
-	 		try {	
-	 			
- 					Finder f = new Finder(LocatorImage);	
- 						Thread.sleep(2000);
- 							if(f.find(new Pattern(LocatorImage)) != null) {	 
- 						s.click(LocatorImage);
- 					ATUReports.add(" Image clciked", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
- 				
- 								}
-	 		     }
- 					 catch(Exception objException)	 			   
-	 			{
- 						 ATUReports.add(" Image not found", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
- 						 	System.out.println(strErrorMsg);
- 			    	 }
-               }
-  
-  
-  	public  void sikuliImageExist(String LocatorImage ) {
-
-  							try {
-  									Match m = s.exists(new Pattern(LocatorImage).exact());
-  										Thread.sleep(2000);
-  											if(m != null) {	 
-  												s.click(LocatorImage);
-					      ATUReports.add(" Image Displayed in browser", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));							      
-				}
-	         }
-	         catch(Exception objException)	 			   
-	         
-  							{	
-	        	 				ATUReports.add(" Image not Displayed in browser", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-	        	 					System.out.println(strErrorMsg);
-	         	}
-		
-     		}
-     		*/
- 
-  	
-  public String waitUntilDonwloadCompleted() throws InterruptedException {
+	public String waitUntilDonwloadCompleted() throws InterruptedException {
       // Store the current window handle
       String mainWindow = driver.getWindowHandle();
 
@@ -672,6 +535,7 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
   		return false;
   	}
   	
+	
   	public synchronized boolean deleteFile(String dirPath, String fileName) throws Exception {
   		try {
   			if(fileName.equals("*")) {
@@ -692,6 +556,7 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 		}
   	}
   	
+  	
   	public synchronized boolean scrollIntoView(WebElement element, String strObjectName) throws Exception {
   		try
 		{
@@ -708,6 +573,7 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 		}
   	}
   	
+  	
   	public static boolean switchToFrame(WebElement element){
 	      try{
 	          driver.switchTo().frame(element);
@@ -717,6 +583,7 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 	      }
 	}
 	
+  	
 	public static boolean switchToMainFrame(){
 	      try{
 	          driver.switchTo().parentFrame();
@@ -732,17 +599,21 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
 		driver.switchTo().window(newTab.get(1));
 	}
 	
+	
 	public void switchToOldWindow() {
 		ArrayList<String> newTab = new ArrayList<String>(driver.getWindowHandles());
 		driver.close();
 	    driver.switchTo().window(newTab.get(0));
 	}
 	
+	
 	public WebElement expandRootElement(WebElement element) {
 		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
 	.executeScript("return arguments[0].shadowRoot", element);
 		return ele;
 	}
+	
+	
 	public void moveToElement(WebElement objWebElement, String strObjectName) {
  		 //Instantiate Action Class        
        Actions actions = new Actions(driver);
@@ -750,14 +621,10 @@ public synchronized void waitForElement(waitCondition condition, WebElement elem
    	actions.moveToElement(objWebElement).perform();
  	}
 	
+	
 	public String getBrowserUrl(){
 	      return driver.getCurrentUrl();
 	}
 
-	//===========================MAIN METHOD==============================================
-	public static void main(String[] args)
-	{
-
-	}
-
+	
 }

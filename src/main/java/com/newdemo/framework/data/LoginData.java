@@ -18,7 +18,7 @@ public class LoginData
 	Utilites Functions = null;
 	BaseSetupClass enviornment ;
 	
-	//===================DECLARE PARAMETERIZATION VARIABLES======================
+	//============================DECLARE PARAMETERIZATION VARIABLES======================
 	HSSFWorkbook objWB = null;
 	HashMap hmParamsNValues = null;
 	int intParamInputRow = 0;
@@ -26,8 +26,6 @@ public class LoginData
 	
 	//============================FIELD VARIABLES DECLARATION=====================================
 	public String strDTURL = "";
-	public String strDTUserName = "";
-	public String strDTPassword = "";
 	public HashMap <String, Object> getData;
 	
 	public LoginData(String strParametersNValues,HashMap <String, Object> getExcelData) throws Exception
@@ -46,8 +44,6 @@ public class LoginData
 		
 		HSSFSheet objSHInputSheet = objWB.getSheet(strParamGetSheetName);
 		strDTURL = Functions.GetCellValueForRowNum(objSHInputSheet, "URL", intParamInputRow);
-		strDTUserName = Functions.GetCellValueForRowNum(objSHInputSheet, "UserName", intParamInputRow);
-		strDTPassword = Functions.GetCellValueForRowNum(objSHInputSheet, "Password", intParamInputRow);
 		getData= getExcelData;
 	}
 
