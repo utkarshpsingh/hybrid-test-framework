@@ -1,4 +1,4 @@
-package com.newdemo.steps;
+package com.newdemo.testcase.web;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,19 +18,19 @@ public class logInTest extends BaseSetupClass
 		this.strDTParametersNValues = ParameterNValue;
 		String testCaseName= this.getClass().getSimpleName();
 		ConcurrentHashMap<String, Object> getData;
-		getData= Trepp().TestScenarioData().getDataForSheetTestData(testCaseName);
+		getData= App().TestScenarioData().getDataForSheetTestData(testCaseName);
 		
 		
-		Trepp().Login().launchURL();
+		App().Login().launchURL();
 		Thread.sleep(10000);
-		Trepp().Login().clickSignInLink();
+		App().Login().clickSignInLink();
 		Thread.sleep(10000);
-		Trepp().Login().waitForUserName(10);
-		Trepp().Login().clickusername();
-		Trepp().Login().typeEmail(getData.get("UserName").toString());
-		Trepp().Login().clickpassword();
-		Trepp().Login().typePassword(getData.get("Password").toString());
-		Trepp().Login().clickSignin();
+		App().Login().waitForUserName(10);
+		App().Login().clickusername();
+		App().Login().typeEmail(getData.get("UserName").toString());
+		App().Login().clickpassword();
+		App().Login().typePassword(getData.get("Password").toString());
+		App().Login().clickSignin();
 		
      }
 }

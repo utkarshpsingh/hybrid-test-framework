@@ -1,4 +1,4 @@
-package com.newdemo.framework.PageObjects;
+package com.newdemo.framework.pageObjects;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;

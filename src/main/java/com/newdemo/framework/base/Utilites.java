@@ -26,12 +26,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
 
-
 public class Utilites
 {
-
-	
-	
+		
 	public HashMap<String, String> SplitNStoreParamsInHashMap(String strParameters)
 	{
 		HashMap<String, String> objHashMap = new HashMap<String, String>();
@@ -51,7 +48,8 @@ public class Utilites
 		return objHashMap;
 	}
 
-	     public String readTextFileAndGetAsString(String strFilePath) throws IOException
+	
+	public String readTextFileAndGetAsString(String strFilePath) throws IOException
 	     {
 	            try
 	            {
@@ -74,6 +72,7 @@ public class Utilites
 	            }
 	     }
 
+	     
 	public int FindColumnNoInExcel(HSSFSheet objSH, String strColumnName, int intRowNum) throws Exception
 	{
 		intRowNum = intRowNum - 1;
@@ -100,8 +99,6 @@ public class Utilites
 		}
 		return -1;
 	}
-
-
 
 	
 	public String GetCellValueForRowNum(HSSFSheet objSH, String strColumnName, int intRowNum) throws Exception
@@ -190,7 +187,6 @@ public class Utilites
 		return strCellValue;
 	}
 
-
 	
 	public String GetExceptionNDisplay(Exception objException, boolean blnIsDisplay) throws Exception
 	{
@@ -213,9 +209,7 @@ public class Utilites
 
    
 
-   
-
-    //==========================CONNECT TO DB=======================================================
+    //==========================================CONNECT TO DataBase=============================================
     public void ConnectDB() throws Exception
     {
 
@@ -237,8 +231,7 @@ public class Utilites
 
     }
 
-
-
+    
 	public static void main(String[] args) throws Exception
 	{
 

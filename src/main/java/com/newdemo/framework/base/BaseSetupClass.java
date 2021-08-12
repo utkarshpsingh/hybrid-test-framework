@@ -42,7 +42,7 @@ public class BaseSetupClass {
 
 	}
 
-	public ApplicationController Trepp = null;
+	public ApplicationController App = null;
 	public String strDTParametersNValues = "";
 	public String ParameterNValue = null;
 	public static String strMainParametersNValues = "";
@@ -200,20 +200,20 @@ public class BaseSetupClass {
 		return wdriver.get();
 	}
 
-	public ApplicationController Trepp() {
-		if (Trepp == null) {
-			Trepp = new ApplicationController(getDriver());
+	public ApplicationController App() {
+		if (App == null) {
+			App = new ApplicationController(getDriver());
 		}
-		Trepp.strParametersNValues = strDTParametersNValues;
-		if (Trepp.strMainParametersNValues == "") {
-			Trepp.strMainParametersNValues = this.ParameterNValue;
+		App.strParametersNValues = strDTParametersNValues;
+		if (App.strMainParametersNValues == "") {
+			App.strMainParametersNValues = this.ParameterNValue;
 		}
-		return Trepp;
+		return App;
 	}
 
 	@AfterMethod
 	public void afterMethod() {
-		this.Trepp = null;
+		this.App = null;
 	}
 
 	@AfterTest

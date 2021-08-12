@@ -627,4 +627,20 @@ public class ReuseableFunctions
 	}
 
 	
+	public Object runJS(String script) {
+		
+		JavascriptExecutor je = (JavascriptExecutor)driver;
+		return je.executeScript(script);
+
+	}
+	
+	
+	public void runJS(String script, WebElement e) {
+		
+		JavascriptExecutor je = (JavascriptExecutor)driver;
+		je.executeScript(script, e);
+
+	}
+	
+	
 }

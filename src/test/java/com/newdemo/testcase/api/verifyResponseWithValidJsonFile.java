@@ -1,4 +1,4 @@
-package com.newdemo.api;
+package com.newdemo.testcase.api;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

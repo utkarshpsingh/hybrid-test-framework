@@ -4,8 +4,8 @@ import java.io.File;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import com.newdemo.framework.base.ReuseableFunctions;
-import com.newdemo.framework.PageObjects.LoginPage;
 import com.newdemo.framework.data.LoginData;
+import com.newdemo.framework.pageObjects.LoginPage;
 
 public class LoginController extends ReuseableFunctions
 {
