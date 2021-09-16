@@ -18,7 +18,7 @@ public class verifyResponseWithValidJsonFile {
 		ApiController = new ApiController(ParameterNValue,"");
 		
 
- 		 ApiController.verifyResponseCodeValidJson();
+ 		// ApiController.verifyResponseCodeValidJson();
         		
 	}
 }

@@ -1,6 +1,6 @@
 # TestFramework
 
-Trepp's Test Automation Framework
+Hybrid Test Automation Framework
 
 This Framework is based on Page Object Model using Selenium Webdriver + java, TestNg and Maven: Page Object Model is an object design pattern in Selenium, where web pages are represented as classes, and the various elements on the page are defined as variables on the class.
 

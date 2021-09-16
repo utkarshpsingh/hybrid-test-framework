@@ -11,7 +11,7 @@
 			value="browserName:chrome;platform:Windows 10;version:87.0;name:Login Functionality Verification;build:Demo Web Full Regression PROD;resolution:1440x900" />
 		<classes>
 			<parameter name="ParameterNValue" value="InputDataRow=>2--SheetName=>Production" />
-			<class name="com.newdemo.steps.logInTest" />
+			<class name="com.newdemo.testcase.web.logInTest" />
 		</classes>
 	</test>
 

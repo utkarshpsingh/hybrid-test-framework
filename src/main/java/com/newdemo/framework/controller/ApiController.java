@@ -68,10 +68,10 @@ public class ApiController {
 	}
 	
 	
-	public Response postRequestToCalc(String URL, String tokenID,String jsonFileName) throws InterruptedException {
+	public Response postRequest(String URL, String tokenID,String jsonFileName) throws InterruptedException {
 		Thread.sleep(20000);
 		RestAssured.baseURI = URL+"calc";
-			System.out.println("CALC END POINT: "+RestAssured.baseURI);	
+			System.out.println("END POINT: "+RestAssured.baseURI);	
 			 File JsonRequestFile = new File(System.getProperty("user.dir")+"/JsonFiles/"+jsonFileName);
 			 				 	
 	     	Response output = (Response)RestAssured.given()
@@ -86,15 +86,15 @@ public class ApiController {
 	     			
 	     		if (output.getStatusCode()== 200) {
 	     			Thread.sleep(1000);
-			  		System.out.println("PASSED : CALC REQUEST | The Status Code is 200 For Calc End Point");
-			  		  System.out.println("CALC REQUEST- TIME | Time Taken For the Calc End Point Request : "+output.getTime());
-			  			System.out.println("CALC REQUEST- STATUS | Status Line For the Calc End Point: "+output.getStatusLine());
+			  		System.out.println("PASSED : REQUEST | The Status Code is 200 For Calc End Point");
+			  		  System.out.println("REQUEST- TIME | Time Taken For the Calc End Point Request : "+output.getTime());
+			  			System.out.println("REQUEST- STATUS | Status Line For the Calc End Point: "+output.getStatusLine());
 		  			 	
 			  	}else {
 			  		Thread.sleep(1000);
-			  		System.err.println("FAILED : CALC REQUEST | The Status Code is "+output.getStatusCode()+" For Calc End Point");
-			  		 System.out.println("CALC REQUEST- TIME | Time Taken For the Calc End Point Request : "+output.getTime());
-		  			  System.out.println("CALC REQUEST- STATUS | Status Line For the Calc End Point: "+output.getStatusLine());
+			  		System.err.println("FAILED : REQUEST | The Status Code is "+output.getStatusCode()+" For Calc End Point");
+			  		 System.out.println("REQUEST- TIME | Time Taken For the Calc End Point Request : "+output.getTime());
+		  			  System.out.println("REQUEST- STATUS | Status Line For the Calc End Point: "+output.getStatusLine());
 		  			
 			  	}
 	     		
@@ -102,10 +102,10 @@ public class ApiController {
 	}
 
 	
-	public int getResponseCodeFromCalc(String URL, String tokenID,String jsonFileName) throws InterruptedException {
+	public int getResponseCode(String URL, String tokenID,String jsonFileName) throws InterruptedException {
 		
 		RestAssured.baseURI = URL+"calc";
-		 	System.out.println("CALC END POINT: "+RestAssured.baseURI);	
+		 	System.out.println("END POINT: "+RestAssured.baseURI);	
 		 		File JsonRequestFile = new File(System.getProperty("user.dir")+"/JsonFiles/"+jsonFileName);
 		 		Thread.sleep(6000);	
 	     	Response output = (Response)RestAssured.given()
@@ -116,21 +116,11 @@ public class ApiController {
 				.when()
 				.post(RestAssured.baseURI);
 	     					
-		System.out.println("CALC REQUEST Status CODE | The Status Code is "+output.getStatusCode()+" For Calc End Point");
+		System.out.println("REQUEST Status CODE | The Status Code is "+output.getStatusCode()+" For End Point");
 			  		  		
   	return output.getStatusCode();
 	}
 	
-	
-	public void verifyResponseCodeValidJson() throws InterruptedException, IOException {
-					
-	  int responseCode = getResponseCodeFromCalc(this.URL,getTokenID(),"API_ValidJson_File.json");
-
-		Assert.assertEquals(responseCode, 200,"Actual :"+responseCode+"and Expected : 200");
-				
-			
-	}
-		
 	
 	public boolean compareJsonResponse(Response output1, String output2) throws InterruptedException{
 		boolean blnFlagResult =true;

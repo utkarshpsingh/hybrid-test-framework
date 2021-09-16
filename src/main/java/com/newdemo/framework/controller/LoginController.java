@@ -1,6 +1,6 @@
 package com.newdemo.framework.controller;
 
-import java.io.File;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import com.newdemo.framework.base.ReuseableFunctions;
@@ -11,9 +11,6 @@ public class LoginController extends ReuseableFunctions
 {
 	LoginPage login = null;
 	LoginData loginData = null;
-	String sheet1 = System.getProperty("user.dir") + "/Results/Test1.csv";	
-	String sheet2 = System.getProperty("user.dir") + "/Results/Test2.csv";	
-	File file2 = new File(sheet2);	
 	
 	
 	public LoginController(WebDriver driver) throws Exception 
