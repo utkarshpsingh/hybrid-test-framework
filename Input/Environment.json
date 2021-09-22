@@ -1,0 +1,46 @@
+{
+    "Environment":{
+		
+		"Production":{
+			
+			"WEB":{
+				"URL":"http://automationpractice.com/"
+			},
+			"API":{
+				"URL_ENDPOINT":"",
+				"UserName":"utkarsh",
+				"Password":"xyz@12345"
+			}	
+		},
+			
+		"Staging":{
+			
+			"WEB":{
+				"URL":"http://automationpractice.com/"
+			},
+			"API":{
+				"URL_ENDPOINT":"",
+				"UserName":"utkarsh",
+				"Password":"xyz@12345"
+			}
+			
+		},
+
+		"Development":{
+			
+			"WEB":{
+				"URL":"http://automationpractice.com/"
+			},
+			"API":{
+				"URL_ENDPOINT":"",
+				"UserName":"utkarsh",
+				"Password":"xyz@12345"
+			}
+			
+		}		
+		
+	}
+	
+	
+	
+}

@@ -17,7 +17,7 @@ import io.restassured.response.Response;
 
 public class ApiController {
 
-		
+	
 	ApiData apiData = null;
 	public static String URL=	null;
 	public static String username=	null;
@@ -26,17 +26,14 @@ public class ApiController {
 	
 	public ApiController(WebDriver driver) throws Exception 
 	{
-		
+		//Nothing to construct as of now
 	}
 
 		
 	public ApiController(String ParameterNValue,String extArg) throws Exception 
 	{
-		  apiData = new ApiData(ParameterNValue);  
-		  URL= apiData.strAPIURL;
-		   username= apiData.strAPIUserName;
-		  password= apiData.strAPIPassword;
-		
+		  apiData = new ApiData();  
+		 		
 	}
 	
 	
@@ -45,12 +42,12 @@ public class ApiController {
 	  String bToken=null;
 		JsonPath BJsonToken =null;
 		
-		RestAssured.baseURI = URL+"users/token";
+		RestAssured.baseURI = apiData.strAPIURL+"users/token";
  	     	System.out.println("TOKEN END POINT: "+RestAssured.baseURI);
 	     	Response response = (Response)RestAssured.given()
 	      		.relaxedHTTPSValidation()	
 				.contentType("application/json")
-				.body("{\r\n  \"username\": \""+username+"\",\r\n  \"password\": \""+password+"\"\r\n}")
+				.body("{\r\n  \"username\": \""+apiData.strAPIUserName+"\",\r\n  \"password\": \""+apiData.strAPIPassword+"\"\r\n}")
 				.when()
 			.post(RestAssured.baseURI);
 		

@@ -52,7 +52,7 @@ public class BaseSetupClass {
 	public static final String CHROME_DRIVER_KEY = "webdriver.chrome.driver";
 	public static final String IE_DRIVER_KEY = "webdriver.ie.driver";
 	public static final String IE_DRIVER_EXE = "./Lib/IEDriverServer.exe";
-	public static final String JAVA_TEMP_DIR = "java.io.tmpdir";
+	
 	private PropertiesConfiguration context;
 
 	public static ThreadLocal<WebDriver> wdriver = new ThreadLocal<WebDriver>();
@@ -66,7 +66,7 @@ public class BaseSetupClass {
 	public Properties config;
 
 	public static String downloadFilepath = null;
-	public static String inputFilepath = null;
+	public static String jsonFilepath = null;
 
 	public Configuration getContext() {
 		return (Configuration) this.context;
@@ -92,7 +92,7 @@ public class BaseSetupClass {
 	}
 
 	public enum BROWSER {
-		firefox, ie, microsoftedge, chrome, safari
+		firefox, ie, microsoftEdge, chrome, safari
 	}
 
 	@Parameters({ "remoteurl", "Execute", "capabilities", "environment" })
@@ -101,9 +101,10 @@ public class BaseSetupClass {
 	public synchronized void LaunchBrowser(String remoteurl, String Execute, String capabilities, String environment) throws Exception {
 		
 		System.setProperty("ExectionPlatform", Execute);
+		System.setProperty("environment", environment);
 		env = SystemProperties.getProperty("environment", environment);
-		BaseSetupClass.inputFilepath = objProperties.getProperty("InputDatasheetPath");
-		setEnviornment(BaseSetupClass.inputFilepath + "Datasheet_Environment.xls");
+		BaseSetupClass.jsonFilepath = objProperties.getProperty("InputDatasheetPath");
+		setEnviornment(BaseSetupClass.jsonFilepath + "Environment.json");
 		
 		BaseSetupClass.executionEnv = Execute.toLowerCase();
 
@@ -186,11 +187,12 @@ public class BaseSetupClass {
 				localDriver.manage().window().fullscreen();
 			}
 		}
-		setDriver(localDriver);
-		SessionId session = ((RemoteWebDriver) wdriver.get()).getSessionId();
-		System.out.println("Session id: " + session.toString());
+		
+	setDriver(localDriver);
+	SessionId session = ((RemoteWebDriver) wdriver.get()).getSessionId();
+	System.out.println("Session id: " + session.toString());
 
-	}
+	}//LaunchBrowser
 
 	public static void setDriver(WebDriver wdriver) {
 		BaseSetupClass.wdriver.set(wdriver);
@@ -201,13 +203,11 @@ public class BaseSetupClass {
 	}
 
 	public ApplicationController App() {
+		
 		if (App == null) {
 			App = new ApplicationController(getDriver());
 		}
-		App.strParametersNValues = strDTParametersNValues;
-		if (App.strMainParametersNValues == "") {
-			App.strMainParametersNValues = this.ParameterNValue;
-		}
+		
 		return App;
 	}
 
@@ -217,7 +217,7 @@ public class BaseSetupClass {
 	}
 
 	@AfterTest
-	public synchronized void TearDown() throws Exception {
+	public synchronized void tearDown() throws Exception {
 		wdriver.get().quit();
 	}
 

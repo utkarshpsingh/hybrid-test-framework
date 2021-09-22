@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 import javax.script.ScriptException;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecuteResultHandler;
@@ -114,7 +116,7 @@ public class ReuseableFunctions
 		{
 			waitForElement(objWebElement);
 			Actions actions = new Actions(driver);
-	        actions.moveToElement(objWebElement).build().perform();;
+	        actions.moveToElement(objWebElement).click().build().perform();;
 			Thread.sleep(1000);
 					System.out.println(strObjectName +  " "+  "Clicked");
 			return true;
@@ -158,7 +160,7 @@ public class ReuseableFunctions
 	}
 
 
-	public synchronized Boolean SelectFromDropDown(WebElement objWebElement, String strObjectName, String strValue) throws Exception
+	public synchronized Boolean selectFromDropDown(WebElement objWebElement, String strObjectName, String strValue) throws Exception
 
 	{
 		try
@@ -182,7 +184,7 @@ public class ReuseableFunctions
 	}
 
 	
-	public Boolean SelectFromDropDownVisibleText(WebElement objWebElement, String strObjectName, String strValue) throws Exception
+	public Boolean selectFromDropDownVisibleText(WebElement objWebElement, String strObjectName, String strValue) throws Exception
 	{
 		try
 		{
@@ -203,7 +205,7 @@ public class ReuseableFunctions
 	}
 	
 	
-	public Boolean SelectFromDropDownbyindex (WebElement objWebElement, String strObjectName, int strindex) throws Exception
+	public Boolean selectFromDropDownbyindex (WebElement objWebElement, String strObjectName, int strindex) throws Exception
 	{
 		try
 		{
@@ -224,7 +226,7 @@ public class ReuseableFunctions
 	}
 	
 	
-	public synchronized Boolean SelectFromDropDownIndex(WebElement objWebElement, String strObjectName, int strIndex) throws Exception
+	public synchronized Boolean selectFromDropDownIndex(WebElement objWebElement, String strObjectName, int strIndex) throws Exception
 	{
 		try
 		{
@@ -339,7 +341,7 @@ public class ReuseableFunctions
 	}
 	
 
-	public synchronized void ElementPresentorEnabled(WebElement objWebElement, String  getStatus, String strObjectName) throws InterruptedException{
+	public synchronized void elementPresentorEnabled(WebElement objWebElement, String  getStatus, String strObjectName) throws InterruptedException{
         try{
             if(getStatus.equals("Enabled")){
                 if(objWebElement.isEnabled())
@@ -400,7 +402,7 @@ public class ReuseableFunctions
 	 }
 
 
-	public static void DeleteoldDownloadedfiles( String portfolio, String Env, File difference ) throws ScriptException, IOException, InterruptedException {
+	public static void deleteoldDownloadedfiles( String portfolio, String Env, File difference ) throws ScriptException, IOException, InterruptedException {
 	
 		 
 		 String folderName = System.getProperty("user.dir") + "/Downloads/";
@@ -444,37 +446,40 @@ public class ReuseableFunctions
 	 
 	
 	public static void convertCSV( ) throws ScriptException, IOException, InterruptedException {
-  try {
-         CommandLine cmdLine = new CommandLine("python3");
-		 cmdLine.addArgument(System.getProperty("user.dir") + "/Config/test.py");
-		 DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-
-		 ExecuteWatchdog watchdog = new ExecuteWatchdog(60*1000);
-		 Executor executor = new DefaultExecutor();
-		 executor.setExitValue(1);
-		 executor.setWatchdog(watchdog);
-		 executor.execute(cmdLine, resultHandler);
-
-		 // some time later the result handler callback was invoked so we
-		 // can safely request the exit value
-		 resultHandler.waitFor();
+	  
+		try {
+	         CommandLine cmdLine = new CommandLine("python3");
+			 cmdLine.addArgument(System.getProperty("user.dir") + "/Config/test.py");
+			 DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
+	
+			 ExecuteWatchdog watchdog = new ExecuteWatchdog(60*1000);
+			 Executor executor = new DefaultExecutor();
+			 executor.setExitValue(1);
+			 executor.setWatchdog(watchdog);
+			 executor.execute(cmdLine, resultHandler);
+	
+			 // some time later the result handler callback was invoked so we
+			 // can safely request the exit value
+			 resultHandler.waitFor();
+			 
+	  	} catch (Exception ex) {
+	  		System.out.println(ex.getMessage() + "Found Exception");
+	  		}
 		 
-  	} catch (Exception ex) {
-  		System.out.println(ex.getMessage() + "Found Exception");
-  		}
-	 
- } 
+	} 
 
 
 	public String waitUntilDonwloadCompleted() throws InterruptedException {
-      // Store the current window handle
+      
+	  // Store the current window handle
       String mainWindow = driver.getWindowHandle();
 
       // open a new tab
       JavascriptExecutor js = (JavascriptExecutor)driver;
       js.executeScript("window.open()");
-     // switch to new tab
-    // Switch to new window opened
+     
+      // switch to new tab
+      // Switch to new window opened
       for(String winHandle : driver.getWindowHandles()){
           driver.switchTo().window(winHandle);
       }
@@ -607,6 +612,25 @@ public class ReuseableFunctions
 	}
 	
 	
+	public void switchToWindow(String windowTitle) {
+		
+		String parentWindow= driver.getWindowHandle();
+		
+			Set<String> handler= driver.getWindowHandles();
+				Iterator<String> itr=handler.iterator();
+			
+		while(itr.hasNext()) {
+			
+			if(driver.switchTo().window(itr.next()).getTitle().contains(windowTitle)) {
+				
+			}else {
+				driver.switchTo().window(parentWindow);
+			}			
+		}
+		
+	}
+	
+	
 	public WebElement expandRootElement(WebElement element) {
 		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
 	.executeScript("return arguments[0].shadowRoot", element);
@@ -617,8 +641,8 @@ public class ReuseableFunctions
 	public void moveToElement(WebElement objWebElement, String strObjectName) {
  		 //Instantiate Action Class        
        Actions actions = new Actions(driver);
-   	//Mouse hover action on element 
-   	actions.moveToElement(objWebElement).perform();
+	   	//Mouse hover action on element 
+	   	actions.moveToElement(objWebElement).perform();
  	}
 	
 	

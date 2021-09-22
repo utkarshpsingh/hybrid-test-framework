@@ -4,7 +4,7 @@ package com.newdemo.framework.controller;
 import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 import com.newdemo.framework.base.BaseSetupClass;
-import com.newdemo.framework.data.LoginData;
+import com.newdemo.framework.data.WebData;
 
 
 
@@ -19,7 +19,7 @@ public class ApplicationController
 	public String strParametersNValues = "";
 	public String strMainParametersNValues = "";
 	public LoginController login = null;
-	public LoginData loginData = null;
+	public WebData loginData = null;
 	public TestScenarioDataController testScenarioData =null;
 	
 	public ApplicationController(WebDriver driver)
@@ -36,8 +36,7 @@ public class ApplicationController
 			login = new LoginController(driver);
 			
 		}
-		login.loginData= new LoginData(strParametersNValues,getData);
-
+		
 		return login;
 	}
 	

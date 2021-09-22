@@ -9,13 +9,12 @@ import com.newdemo.framework.base.BaseSetupClass;
 @Test
 public class logInTest extends BaseSetupClass
 {
-	@Parameters("ParameterNValue")
+	
 	@Test()
-	public void signInTest(String ParameterNValue) throws Exception
+	public void signInTest() throws Exception
 	
 	{
-		
-		this.strDTParametersNValues = ParameterNValue;
+				
 		String testCaseName= this.getClass().getSimpleName();
 		ConcurrentHashMap<String, Object> getData;
 		getData= App().TestScenarioData().getDataForSheetTestData(testCaseName);
@@ -33,4 +32,6 @@ public class logInTest extends BaseSetupClass
 		App().Login().clickSignin();
 		
      }
+	
+		
 }

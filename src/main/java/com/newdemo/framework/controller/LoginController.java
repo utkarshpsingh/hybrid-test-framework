@@ -4,19 +4,20 @@ package com.newdemo.framework.controller;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import com.newdemo.framework.base.ReuseableFunctions;
-import com.newdemo.framework.data.LoginData;
+import com.newdemo.framework.data.WebData;
 import com.newdemo.framework.pageObjects.LoginPage;
 
 public class LoginController extends ReuseableFunctions
 {
 	LoginPage login = null;
-	LoginData loginData = null;
+	WebData loginData = null;
 	
 	
 	public LoginController(WebDriver driver) throws Exception 
 	{
 		super(driver); //  driver instance of ReuseableFunctions class that all the page objects inherit from
 			login = PageFactory.initElements(driver, LoginPage.class);
+			loginData= new WebData();
 	}
 	
 	public void launchURL() throws Exception

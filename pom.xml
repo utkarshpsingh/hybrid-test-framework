@@ -28,21 +28,18 @@
  -->
 
 	<properties>
-		<selenium.version>3.141.0</selenium.version>
+		<selenium.version>3.141.59</selenium.version>
 	</properties>
 
 
 	<build>
-
 		<!-- Source directory configuration -->
-
+		
 		<sourceDirectory>src</sourceDirectory>
 
 		<pluginManagement>
 			<plugins>
-
 				<!-- Following plugin executes the testng tests -->
-
 				<plugin>
 
 					<groupId>org.apache.maven.plugins</groupId>
@@ -54,9 +51,7 @@
 						<!-- Suite testng xml file to consider for test execution -->
 
 						<suiteXmlFiles>
-
 							<suiteXmlFile>testngconfig/dmWebProd.xml</suiteXmlFile>
-
 						</suiteXmlFiles>
 
 					</configuration>
@@ -96,60 +91,16 @@
 		</pluginManagement>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>maven-3</id>
-			<activation>
-				<file>
-					<!-- This employs that the basedir expression is only recognized by 
-						Maven 3.x (see MNG-2363) -->
-					<exists>${basedir}</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-site-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-descriptor</id>
-								<goals>
-									<goal>attach-descriptor</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
+	
 
 
 	<dependencies>
 
-
 		<dependency>
-
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
-			<version>${selenium.version}</version>
-
-		</dependency>
-
-		<dependency>
-
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
 			<version>${selenium.version}</version>
-
 		</dependency>
-
-
-
 
 		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
 		<dependency>
@@ -196,21 +147,13 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-safari-driver</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-
-
+		
 		<dependency>
 			<artifactId>selenium-api</artifactId>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<type>jar</type>
 			<version>${selenium.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -273,11 +216,7 @@
 		    <version>2.41.2</version>
 		</dependency>
 
-
-
 	</dependencies>
-
-
 
 
 </project>
