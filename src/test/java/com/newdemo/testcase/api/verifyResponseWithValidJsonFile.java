@@ -1,9 +1,8 @@
-package com.newdemo.testcase.api;
+package test.java.com.newdemo.testcase.api;
 
+import main.java.com.newdemo.framework.controller.ApiController;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import com.newdemo.framework.controller.ApiController;
 
 
 public class verifyResponseWithValidJsonFile {

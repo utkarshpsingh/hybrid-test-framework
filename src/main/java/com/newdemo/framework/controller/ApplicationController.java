@@ -1,15 +1,13 @@
-package com.newdemo.framework.controller;
+package main.java.com.newdemo.framework.controller;
 
 
 import java.util.HashMap;
+
+import main.java.com.newdemo.framework.base.BaseSetupClass;
+import main.java.com.newdemo.framework.data.WebData;
 import org.openqa.selenium.WebDriver;
-import com.newdemo.framework.base.BaseSetupClass;
-import com.newdemo.framework.data.WebData;
 
-
-
-public class ApplicationController
-{
+public class ApplicationController{
 
 	public  WebDriver driver = BaseSetupClass.getDriver();
 

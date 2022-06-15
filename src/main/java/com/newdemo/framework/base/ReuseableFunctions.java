@@ -1,4 +1,4 @@
-package com.newdemo.framework.base;
+package main.java.com.newdemo.framework.base;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import javax.script.ScriptException;
@@ -26,7 +27,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.http.Header;
+import io.restassured.specification.RequestSpecification;
 
+
+/**
+ * @author utkarshsingh
+ *
+ */
+/**
+ * @author utkarshsingh
+ *
+ */
 public class ReuseableFunctions
 
 {
@@ -659,12 +674,63 @@ public class ReuseableFunctions
 	}
 	
 	
-	public void runJS(String script, WebElement e) {
+	public void runJS(String script, WebElement ele) {
 		
 		JavascriptExecutor je = (JavascriptExecutor)driver;
-		je.executeScript(script, e);
+		je.executeScript(script, ele);
 
 	}
 	
+	
+	public Object getRestAPIResponseAsClass(RequestSpecification requestSpec, String resource,
+			Object reqObject, Object resObject) {
+		resObject = RestAssured
+		.given()
+		.spec(requestSpec)
+		.log().all()
+		.body(reqObject)
+        .when()
+        	.post(resource)
+        .then()
+        	//.assertThat().statusCode(200)
+        	.log().all()
+        	.extract().response().as(resObject.getClass());
+		return resObject;
+	}
+	
+	
+	public Object getRestAPIResponseAsClass(RequestSpecification requestSpec, Header header, String resource,
+			Object reqObject, Object resObject) {
+		resObject = RestAssured
+		.given()
+		.spec(requestSpec)
+		.header(header)
+		.log().all()
+		.body(reqObject)
+        .when()
+        	.post(resource)
+        .then()
+        	.assertThat().statusCode(200)
+        	.extract().response().as(resObject.getClass());
+		return resObject;
+	}
+	
+	
+
+	public Object getRestAPIResponseAsClass(RequestSpecification requestSpec, Header header, String resource,
+			Object resObject) {
+		resObject = RestAssured
+		.given()
+		.spec(requestSpec)
+		.header(header)
+		.log().all()
+        .when()
+        	.post(resource)
+        .then()
+        	.assertThat().statusCode(200)
+        	.extract().response().as(resObject.getClass());
+		return resObject;
+	}
+
 	
 }

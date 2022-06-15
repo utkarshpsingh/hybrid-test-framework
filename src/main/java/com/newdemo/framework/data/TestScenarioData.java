@@ -1,4 +1,4 @@
-package com.newdemo.framework.data;
+package main.java.com.newdemo.framework.data;
 
 import java.io.File;
 import java.io.FileInputStream;

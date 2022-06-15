@@ -1,15 +1,15 @@
-package com.newdemo.framework.controller;
+package main.java.com.newdemo.framework.controller;
 
 
 import java.io.File;
 import java.io.IOException;
+
+import main.java.com.newdemo.framework.data.ApiData;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.newdemo.framework.data.ApiData;
-
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -17,7 +17,6 @@ import io.restassured.response.Response;
 
 public class ApiController {
 
-	
 	ApiData apiData = null;
 	public static String URL=	null;
 	public static String username=	null;

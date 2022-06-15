@@ -1,4 +1,4 @@
-package com.newdemo.framework.rerun;
+package main.java.com.newdemo.framework.rerun;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

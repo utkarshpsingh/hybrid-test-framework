@@ -1,4 +1,4 @@
-package com.newdemo.framework.rerun;
+package main.java.com.newdemo.framework.rerun;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;

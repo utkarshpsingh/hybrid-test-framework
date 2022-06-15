@@ -1,4 +1,4 @@
-package com.newdemo.framework.base;
+package main.java.com.newdemo.framework.base;
 
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 
+import main.java.com.newdemo.framework.controller.ApplicationController;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.xmlbeans.SystemProperties;
@@ -26,8 +27,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-
-import com.newdemo.framework.controller.ApplicationController;
 
 public class BaseSetupClass {
 	

@@ -1,4 +1,4 @@
-package com.newdemo.framework.sqlQueries;
+package main.java.com.newdemo.framework.sqlQueries;
 
 
 public class SqlQueries {

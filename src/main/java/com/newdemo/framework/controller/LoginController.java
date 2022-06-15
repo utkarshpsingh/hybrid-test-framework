@@ -1,11 +1,11 @@
-package com.newdemo.framework.controller;
+package main.java.com.newdemo.framework.controller;
 
 
+import main.java.com.newdemo.framework.base.ReuseableFunctions;
+import main.java.com.newdemo.framework.data.WebData;
+import main.java.com.newdemo.framework.pageObjects.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import com.newdemo.framework.base.ReuseableFunctions;
-import com.newdemo.framework.data.WebData;
-import com.newdemo.framework.pageObjects.LoginPage;
 
 public class LoginController extends ReuseableFunctions
 {

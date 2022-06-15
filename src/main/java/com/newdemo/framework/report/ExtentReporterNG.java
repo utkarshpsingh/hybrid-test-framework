@@ -1,4 +1,4 @@
-package com.newdemo.framework.report;
+package main.java.com.newdemo.framework.report;
 
 
 import java.io.File;
