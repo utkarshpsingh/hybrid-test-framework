@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import javax.script.ScriptException;
@@ -28,8 +28,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
 
@@ -47,14 +45,11 @@ public class ReuseableFunctions
 {
 
 	public Properties objCMPProperties = new Properties();
-	public Utilites objUtilitess = new Utilites();
+	public Utilites objUtilites = new Utilites();
 	public String strErrorMsg = "";
-
 	public static WebDriver driver;
 	protected JavascriptExecutor JSExecutor;
-	
 	public WebElement waitElement;
-
 	public WebDriverWait wait;
 	
 	public enum waitCondition {
@@ -68,7 +63,7 @@ public class ReuseableFunctions
 	//==========================INITIALIZE THE WEBDRIVER OBJECT INSIDE COMPONENT REUSABLE FUNCTIONS======
 	      driver = objTempWebDriver;
 	      JSExecutor = (JavascriptExecutor)driver;
-	      wait = new WebDriverWait(driver,20);
+	      wait = new WebDriverWait(driver,Duration.ofSeconds(20));
 
 	}
 
@@ -82,7 +77,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-					strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+					strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 						System.err.println(strErrorMsg);
 							return false;
 		}
@@ -100,7 +95,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 				System.err.println(strObjectName +  " "+  "Not Clicked");
 			return false;
 		}
@@ -118,7 +113,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 				System.err.println(strObjectName +  " "+  "Not Clicked");
 			return false;
 		}
@@ -138,7 +133,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 				System.err.println(strObjectName +  " "+  "Not Clicked");
 			return false;
 		}
@@ -156,7 +151,6 @@ public class ReuseableFunctions
 	
 
 	public synchronized Boolean typeValue(WebElement objWebElement, String strObjectName, String strInputValue   ) throws Exception
-
 	{
 		try
 		{
@@ -167,7 +161,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 				System.err.println(strInputValue + " "+ "Not typed " );
 				return false;
@@ -190,7 +184,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 			System.err.println(strValue + " "+ "Not Selected from DropDown \"" );
 
@@ -212,7 +206,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 			System.err.println(strValue + " "+ "Not Selected from DropDown \"" );
 				return false;
@@ -233,7 +227,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 				System.err.println(strindex + " "+ "Not Selected from DropDown \"" );
 				return false;
@@ -253,9 +247,9 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
-			System.err.println(strIndex + " "+ "Not Selected from DropDown \"" );
+			System.err.println(strIndex + " "+ "Not Selected from DropDown " );
 				return false;
 		}
 	}
@@ -274,7 +268,7 @@ public class ReuseableFunctions
 		
 		catch(Exception objException)
 			{
-				strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+				strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 					System.err.println(strInputValue + " "+ "Not typed " );
 							return false;
@@ -290,9 +284,8 @@ public class ReuseableFunctions
 			waitElement.isDisplayed();
 			
 				return true;		
-		}catch(Exception objException)
-		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+		}catch(Exception objException){
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 		//System.err.println("Unable to launch URL=>" + strURL + " in browser.<BR>Error message=>" + strErrorMsg);
 				System.err.println(strErrorMsg);
 				return false;	
@@ -322,12 +315,31 @@ public class ReuseableFunctions
 	}
 		
 
-	public By getLocatorFromElement(WebElement element) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		
-		Object proxyOrigin = FieldUtils.readField(element, "h", true);
-        Object locator1 = FieldUtils.readField(proxyOrigin, "locator", true);
-        Object findBy = FieldUtils.readField(locator1, "by", true);
-		return (By) findBy;
+	public By getLocatorFromElement(WebElement we) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+			// By format = "[foundFrom] -> locator: term"
+			// see RemoteWebElement toString() implementation
+			String[] data = we.toString().split(" -> ")[1].replace("]", "").split(": ");
+			String locator = data[0];
+			String term = data[1];
+
+			switch (locator) {
+				case "xpath":
+					return By.xpath(term);
+				case "css selector":
+					return By.cssSelector(term);
+				case "id":
+					return By.id(term);
+				case "tag name":
+					return By.tagName(term);
+				case "name":
+					return By.name(term);
+				case "link text":
+					return By.linkText(term);
+				case "class name":
+					return By.className(term);
+			}
+			return (By) we;
 		
 	}
 	
@@ -347,7 +359,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 			System.err.println("Couldn't Extract Text " );
 				
@@ -570,7 +582,7 @@ public class ReuseableFunctions
   			}
   			return false;
 		} catch (Exception e) {
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(e, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(e, true);
 			System.err.println("not able to delete file \n"+strErrorMsg );
 				return false;
 		}
@@ -586,7 +598,7 @@ public class ReuseableFunctions
 		}
 		catch(Exception objException)
 		{
-			strErrorMsg = objUtilitess.GetExceptionNDisplay(objException, true);
+			strErrorMsg = objUtilites.GetExceptionNDisplay(objException, true);
 			
 			System.err.println(strObjectName + " "+ "not bale to scrolled into view \"" );
 				return false;

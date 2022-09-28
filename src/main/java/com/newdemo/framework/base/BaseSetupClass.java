@@ -7,8 +7,10 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import main.java.com.newdemo.framework.controller.ApplicationController;
+import main.java.com.newdemo.framework.controller.TestScenarioDataController;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.xmlbeans.SystemProperties;
@@ -23,10 +25,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Reporter;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class BaseSetupClass {
 	
@@ -38,20 +37,22 @@ public class BaseSetupClass {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public ApplicationController App = null;
-	public String strDTParametersNValues = "";
-	public String ParameterNValue = null;
-	public static String strMainParametersNValues = "";
 	public Utilites commonFunctions = new Utilites();
+	public TestScenarioDataController dataController = null;
+	private ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getData=null;
 
 	// ==========================BROWSER VARIABLES============================================
 	public static final String CHROME_DRIVER_KEY = "webdriver.chrome.driver";
-	public static final String IE_DRIVER_KEY = "webdriver.ie.driver";
-	public static final String IE_DRIVER_EXE = "./Lib/IEDriverServer.exe";
-	
+	public static final String CHROME_DRIVER_EXE = "/Lib/chromedriver.exe";
+
+	public static final String EDGE_DRIVER_KEY = "webdriver.ie.driver";
+	public static final String EDGE_DRIVER_EXE = "./Lib/ieDriverServer.exe";
+
+	public static final String FIREFOX_DRIVER_KEY = "webdriver.geckoDriver.driver";
+	public static final String FIREFOX_DRIVER_EXE = "./Lib/geckoDriver.exe";
 	private PropertiesConfiguration context;
 
 	public static ThreadLocal<WebDriver> wdriver = new ThreadLocal<WebDriver>();
@@ -91,36 +92,61 @@ public class BaseSetupClass {
 	}
 
 	public enum BROWSER {
-		firefox, ie, microsoftEdge, chrome, safari
+		firefox, ie, MicrosoftEdge, chrome, safari
+	}
+
+	@Parameters("Execute")
+	@BeforeSuite
+	public synchronized void loadTestData(String execute) throws Exception {
+
+		dataController= new TestScenarioDataController();
+		getData= dataController.getDataForSheetTestData();
+
+		//Selenium-Grid environment-up
+		if (execute.equalsIgnoreCase("cloud")) {
+
+			try {
+				Runtime runtime = Runtime.getRuntime();
+				String filepath=System.getProperty("user.dir")+"/Config/seleniumGridUp.bat";
+				//runtime.exec("cmd /c start "+filepath);
+				//Thread.sleep(40000);
+
+			} catch (Exception ex) {
+
+				System.err.println("Error: Selenium Grid environment fail to get UP, exception: " + ex.getMessage());
+			}
+		}
 	}
 
 	@Parameters({ "remoteurl", "Execute", "capabilities", "environment" })
-
 	@BeforeTest
-	public synchronized void LaunchBrowser(String remoteurl, String Execute, String capabilities, String environment) throws Exception {
-		
-		System.setProperty("ExectionPlatform", Execute);
+	public synchronized void LaunchBrowser(String remoteUrl, String execute, String capabilities, String environment) throws Exception {
+
+		if(dataController==null){
+			dataController= new TestScenarioDataController();
+			getData= dataController.getDataForSheetTestData();
+		}
+
+		System.setProperty("executionPlatform", execute);
 		System.setProperty("environment", environment);
 		env = SystemProperties.getProperty("environment", environment);
 		BaseSetupClass.jsonFilepath = objProperties.getProperty("InputDatasheetPath");
-		setEnviornment(BaseSetupClass.jsonFilepath + "Environment.json");
+		setEnvironment(BaseSetupClass.jsonFilepath + "Environment.json");
 		
-		BaseSetupClass.executionEnv = Execute.toLowerCase();
+		BaseSetupClass.executionEnv = execute.toLowerCase();
 
 		HashMap<String, String> capMap = this.getCapabilitiesfromParams(capabilities);
 		
 		BROWSER selectedBrowser = null;
-		selectedBrowser = BROWSER.valueOf(capMap.get("browserName").toLowerCase());
+		selectedBrowser = BROWSER.valueOf(capMap.get("browserName"));
 
-		if (Execute.equalsIgnoreCase("cloud")) {
-			DesiredCapabilities caps = new DesiredCapabilities(capMap);
-			caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			caps.setCapability("timezone","UTC-08:00");
-			String URL = remoteurl;
+		if (execute.equalsIgnoreCase("cloud")) {
+			DesiredCapabilities caps = new DesiredCapabilities();
+			caps.setBrowserName(selectedBrowser.toString());
+			//caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			String URL = remoteUrl;
 			if(selectedBrowser == BROWSER.ie) {
-				caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
-				caps.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-				caps.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR, "accept");
+				//handle for specific browser
 			}
 			localDriver = new RemoteWebDriver(new URL(URL), caps);
 
@@ -134,7 +160,7 @@ public class BaseSetupClass {
 
 				switch (selectedBrowser) {
 				case firefox: {
-					System.setProperty("webdriver.gecko.driver", objProperties.getProperty("FirefoxDriverPath"));
+					System.setProperty(FIREFOX_DRIVER_KEY, FIREFOX_DRIVER_EXE);
 					localDriver = new FirefoxDriver();
 					break;
 				}
@@ -153,30 +179,33 @@ public class BaseSetupClass {
 					options.setExperimentalOption("prefs", chromePrefs);
 					options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 					options.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
-					DesiredCapabilities cap = DesiredCapabilities.chrome();
+					DesiredCapabilities cap = new DesiredCapabilities();
+					cap.setBrowserName("chrome");
 					options.merge(cap);
 					cap.setCapability(ChromeOptions.CAPABILITY, options);
-					ChromeDriverService service = new ChromeDriverService.Builder()
-							.usingDriverExecutable(new File(objProperties.getProperty("ChromeDriverPath")))
-							.usingAnyFreePort().build();
-					System.setProperty(CHROME_DRIVER_KEY, objProperties.getProperty("ChromeDriverPath"));
+					//ChromeDriverService service = new ChromeDriverService.Builder()
+					//		.usingDriverExecutable(new File(objProperties.getProperty("ChromeDriverPath")))
+					//		.usingAnyFreePort().build();
+					System.setProperty(CHROME_DRIVER_KEY, System.getProperty("user.dir")+ CHROME_DRIVER_EXE);
 					localDriver = new ChromeDriver(options);
+
 					break;
 
 				}
 				case ie: {
-					System.setProperty(IE_DRIVER_KEY, IE_DRIVER_EXE);
+					System.setProperty(EDGE_DRIVER_KEY, EDGE_DRIVER_EXE);
 					localDriver = new InternetExplorerDriver();
 					break;
 				}
 
 				default: {
-					localDriver = new FirefoxDriver();
+					System.err.println("Error: NO DRIVER INITIALISED");
 				}
 				}
 			} catch (Throwable exp) {
 				Reporter.log("Exception in browser initialization!!! : " + exp.getMessage());
 			}
+
 
 			String OS = System.getProperty("os.name").toLowerCase();
 			if (OS.indexOf("win") >= 0) {
@@ -191,10 +220,16 @@ public class BaseSetupClass {
 	SessionId session = ((RemoteWebDriver) wdriver.get()).getSessionId();
 	System.out.println("Session id: " + session.toString());
 
+
+
 	}//LaunchBrowser
 
 	public static void setDriver(WebDriver wdriver) {
 		BaseSetupClass.wdriver.set(wdriver);
+	}
+
+	public ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getTestData(){
+		return getData;
 	}
 
 	public static WebDriver getDriver() {
@@ -220,12 +255,12 @@ public class BaseSetupClass {
 		wdriver.get().quit();
 	}
 
-	public static String getEnviornment() {
+	public static String getEnvironment() {
 		return enviornment;
 	}
 
-	public void setEnviornment(String enviornment) {
-		BaseSetupClass.enviornment = enviornment;
+	public void setEnvironment(String environment) {
+		BaseSetupClass.enviornment = environment;
 	}
 
 }

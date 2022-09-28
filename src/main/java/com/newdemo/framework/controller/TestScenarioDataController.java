@@ -10,17 +10,15 @@ import main.java.com.newdemo.framework.pageObjects.LoginPage;
 import org.openqa.selenium.WebDriver;
 
 
-public class TestScenarioDataController extends ReuseableFunctions {
+public class TestScenarioDataController {
 	
 	LoginPage login = null;
 	TestScenarioData testScenarioData = null;
 
-	public TestScenarioDataController(WebDriver driver) throws Exception {
-		super(driver);
+	public TestScenarioDataController() throws Exception {
 		testScenarioData = new TestScenarioData();
-		
-	}	
-	
+	}
+
 	
 	 public synchronized ConcurrentHashMap<String, Object> getDataForSheetTestData(String testCaseName) throws IOException {
 		
@@ -31,6 +29,16 @@ public class TestScenarioDataController extends ReuseableFunctions {
 		
 	 	return data; 
 	 }
+
+	public synchronized ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getDataForSheetTestData() throws IOException {
+
+		String filePath =System.getProperty("user.dir")+"/Input/TestData.xlsx";
+		String sheetName= "TestData";
+
+		ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> data =testScenarioData.loadTestData(filePath, sheetName, "");
+
+		return data;
+	}
 
 
 }
