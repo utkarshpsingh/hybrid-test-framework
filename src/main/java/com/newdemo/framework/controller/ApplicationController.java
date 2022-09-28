@@ -1,23 +1,20 @@
-package com.newdemo.framework.controller;
+package main.java.com.newdemo.framework.controller;
 
 
 import java.util.HashMap;
+
+import main.java.com.newdemo.framework.base.BaseSetupClass;
+import main.java.com.newdemo.framework.data.WebData;
+import main.java.com.newdemo.framework.pageFunctions.LoginController;
 import org.openqa.selenium.WebDriver;
-import com.newdemo.framework.base.BaseSetupClass;
-import com.newdemo.framework.data.WebData;
 
-
-
-public class ApplicationController
-{
+public class ApplicationController{
 
 	public  WebDriver driver = BaseSetupClass.getDriver();
 
 	//====================CONTROLLER OBJECTS=======================
 
 	public HashMap <String, Object> getData;
-	public String strParametersNValues = "";
-	public String strMainParametersNValues = "";
 	public LoginController login = null;
 	public WebData loginData = null;
 	public TestScenarioDataController testScenarioData =null;
@@ -27,16 +24,13 @@ public class ApplicationController
 		this.driver = driver;
 	
 	}
-	
 
-	public LoginController Login() throws Exception
+	public LoginController WebLogin() throws Exception
 	{
 		if(login == null)
 		{
 			login = new LoginController(driver);
-			
 		}
-		
 		return login;
 	}
 	
@@ -45,12 +39,10 @@ public class ApplicationController
 		
 		if (testScenarioData==null) 
 		{
-			testScenarioData= new TestScenarioDataController(driver);
+			testScenarioData= new TestScenarioDataController();
 		}
-		
 		return testScenarioData;
-		
-		
+
 	}
 	
 	

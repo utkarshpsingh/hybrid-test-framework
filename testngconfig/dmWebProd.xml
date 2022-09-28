@@ -1,23 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="AutomationDemo-Production" verbose="1" parallel="tests" thread-count="1">
-	<parameter name="Execute" value="local" />
-	<parameter name="remoteurl"	value="https://xyz@hub.lambdatest.com/wd/hub" />
+<suite name="AutomationDemo-Production" parallel="tests" thread-count="2">
+
+	<parameter name="Execute" value="cloud" />
+	<parameter name="remoteurl"	value="http://localhost:4444/wd/hub" />
 	<parameter name="environment" value="Production" />
 
-
-	<test name="Login Functionality Verification" preserveorder="true">
-		<parameter name="capabilities"
-			value="browserName:chrome;platform:Windows 10;version:87.0;name:Login Functionality Verification;build:Demo Web Full Regression PROD;resolution:1440x900" />
+	<test name="Login Functionality Verification -CHROME" >
+		<parameter name="capabilities" value="browserName:chrome;platform:Windows 10" />
 		<classes>
-			<class name="com.newdemo.testcase.web.logInTest" />
+			<class name="test.java.com.newdemo.testcase.web.LogIn_Test" />
 		</classes>
 	</test>
 
+	<test name="Login Functionality Verification -FIREFOX" >
+		<parameter name="capabilities" value="browserName:firefox;platform:Windows 10" />
+		<classes>
+			<class name="test.java.com.newdemo.testcase.web.LogIn_Test" />
+		</classes>
+	</test>
+
+	<test name="Login Functionality Verification -EDGE" >
+		<parameter name="capabilities" value="browserName:MicrosoftEdge;platform:Windows 10" />
+		<classes>
+			<class name="test.java.com.newdemo.testcase.web.LogIn_Test" />
+		</classes>
+	</test>
+
+	<test name="Add To Cart Functionality Verification-CHROME">
+		<parameter name="capabilities"
+				   value="browserName:chrome;platform:Windows 10" />
+		<classes>
+			<class name="test.java.com.newdemo.testcase.web.AddToCart_Test" />
+		</classes>
+	</test>
+
+	<test name="Add To Cart Functionality Verification-FIREFOX">
+		<parameter name="capabilities"
+				   value="browserName:firefox;platform:Windows 10" />
+		<classes>
+			<class name="test.java.com.newdemo.testcase.web.AddToCart_Test" />
+		</classes>
+	</test>
+
+	<test name="Add To Cart Functionality Verification-EDGE">
+		<parameter name="capabilities"
+				   value="browserName:MicrosoftEdge;platform:Windows 10" />
+		<classes>
+			<class name="test.java.com.newdemo.testcase.web.AddToCart_Test" />
+		</classes>
+	</test>
 
 	<listeners>
-		<listener class-name="com.newdemo.framework.report.ExtentReporterNG" />
-		<listener class-name="com.newdemo.framework.rerun.RetryListenerClass" />
+		<listener class-name="main.java.com.newdemo.framework.rerun.RetryListenerClass" />
+		<listener class-name="main.java.com.newdemo.framework.report.ExtentReporterNG" />
 	</listeners>
 
 

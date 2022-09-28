@@ -1,15 +1,13 @@
-package com.newdemo.framework.controller;
+package main.java.com.newdemo.framework.controller;
 
 
 import java.io.File;
 import java.io.IOException;
+
+import main.java.com.newdemo.framework.data.ApiData;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.newdemo.framework.data.ApiData;
-
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -17,7 +15,6 @@ import io.restassured.response.Response;
 
 public class ApiController {
 
-	
 	ApiData apiData = null;
 	public static String URL=	null;
 	public static String username=	null;
@@ -117,85 +114,6 @@ public class ApiController {
 			  		  		
   	return output.getStatusCode();
 	}
-	
-	
-	public boolean compareJsonResponse(Response output1, String output2) throws InterruptedException{
-		boolean blnFlagResult =true;
-		
-		try {
-			
-			JsonParser parser = new JsonParser();
-			 JsonElement actualJsonResponce = parser.parse(output1.asString());			
-			  JsonElement expJsonResponce = parser.parse(output2);
-			  
-			boolean compareJson = actualJsonResponce.equals(expJsonResponce);
-			
-			if(compareJson==false) {
-				
-				blnFlagResult= false;
-				Thread.sleep(1000);
-					System.err.println("FAILED: Json Response Comparision Result: "+compareJson);
-					
-					 String Output1Calc= output1.asString().trim();
-		     			String Output2Calc= output2.trim();
-		     		  	     			
-				     	if(Output1Calc.equalsIgnoreCase(Output2Calc)) {
-				     		System.out.println("Json as String Comparision Result : PASSED");
-				     			
-				     	}else {
-				     			System.err.println("Json as String Comparision Result: FAILED");
-				     			
-				     	}
-				     	  Thread.sleep(2000);
-				     	  
-				     	System.err.println("Json Comparison Differences: "+StringUtils.difference(Output1Calc, Output2Calc));
-			} else {
-				System.out.println("PASSED: Json Response Comparision Result: "+compareJson);
-			}
-			
-			
-		}catch(Exception objException){
-			
-			objException.printStackTrace();
-				System.err.println("EXCEPTION OCCURIED: "+objException.getMessage());
-		}	
-		
-		return blnFlagResult;
-	}
 
-	
-	public boolean compareJsonResponse(String output1, String output2) throws InterruptedException{
-		boolean blnFlagResult =true;
-		
-		try {
-						
-			JsonParser parser = new JsonParser();
-			 JsonElement actualJsonResponce = parser.parse(output1.toString());	
-			
-			  JsonElement expJsonResponce = parser.parse(output2.toString());
-			 
-			  boolean compareJson = actualJsonResponce.equals(expJsonResponce);
-							     			
-		     	if(compareJson) {
-		     		System.out.println("Json as String Comparision Result : PASSED");
-		     			
-		     	}else {
-		     		blnFlagResult= false;
-		     			System.err.println("Json as String Comparision Result: FAILED");
-		     			
-		     	}				     	 		
-			
-		}catch(Exception objException){
-			
-			objException.printStackTrace();
-				System.err.println("EXCEPTION OCCURIED: "+objException.getMessage());
-		}	
-		
-		return blnFlagResult;
-	}
-		
-	
-	
-	
 	
 }//Class closing

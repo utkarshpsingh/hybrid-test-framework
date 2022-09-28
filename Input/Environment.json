@@ -4,7 +4,7 @@
 		"Production":{
 			
 			"WEB":{
-				"URL":"http://automationpractice.com/"
+				"URL":"https://www.saucedemo.com/"
 			},
 			"API":{
 				"URL_ENDPOINT":"",
@@ -16,7 +16,7 @@
 		"Staging":{
 			
 			"WEB":{
-				"URL":"http://automationpractice.com/"
+				"URL":"https://www.saucedemo.com/"
 			},
 			"API":{
 				"URL_ENDPOINT":"",
@@ -29,7 +29,7 @@
 		"Development":{
 			
 			"WEB":{
-				"URL":"http://automationpractice.com/"
+				"URL":"https://www.saucedemo.com/"
 			},
 			"API":{
 				"URL_ENDPOINT":"",

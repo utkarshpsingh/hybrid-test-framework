@@ -26,11 +26,11 @@
 	</distributionManagement>
 
  -->
-
+<!--
 	<properties>
-		<selenium.version>3.141.59</selenium.version>
+		<selenium.version>4.4.0</selenium.version>
 	</properties>
-
+-->
 
 	<build>
 		<!-- Source directory configuration -->
@@ -39,7 +39,7 @@
 
 		<pluginManagement>
 			<plugins>
-				<!-- Following plugin executes the testng tests -->
+				<!-- Following plugin executes the testNG tests -->
 				<plugin>
 
 					<groupId>org.apache.maven.plugins</groupId>
@@ -49,11 +49,9 @@
 					<configuration>
 						<printSummary>true</printSummary>
 						<!-- Suite testng xml file to consider for test execution -->
-
 						<suiteXmlFiles>
 							<suiteXmlFile>testngconfig/dmWebProd.xml</suiteXmlFile>
 						</suiteXmlFiles>
-
 					</configuration>
 
 				</plugin>
@@ -91,15 +89,13 @@
 		</pluginManagement>
 	</build>
 
-	
-
-
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>${selenium.version}</version>
+			<artifactId>selenium-java</artifactId>
+			<version>4.4.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
@@ -143,19 +139,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		
-		<dependency>
-			<artifactId>selenium-api</artifactId>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<type>jar</type>
-			<version>${selenium.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>4.1.2</version>
@@ -167,39 +150,11 @@
 			<version>4.1.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>30.0-jre</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.6</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core -->
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
-			<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>3.5.13</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.14.3</version>
+			<version>7.1.0</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
