@@ -1,7 +1,6 @@
 package main.java.com.newdemo.framework.pageFunctions;
 
-
-import main.java.com.newdemo.framework.base.ReuseableFunctions;
+import main.java.com.newdemo.framework.base.ReusableFunctions;
 import main.java.com.newdemo.framework.data.WebData;
 import main.java.com.newdemo.framework.pageObjects.HomePage;
 import main.java.com.newdemo.framework.pageObjects.LoginPage;
@@ -9,13 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class LoginController extends ReuseableFunctions
+public class LoginController extends ReusableFunctions
 {
 	LoginPage login = null;
 	HomePage homePage = null;
 	WebData loginData = null;
-	
-	
+
 	public LoginController(WebDriver driver) throws Exception 
 	{
 		super(driver); //  driver instance of ReusableFunctions class that all the page objects inherit from

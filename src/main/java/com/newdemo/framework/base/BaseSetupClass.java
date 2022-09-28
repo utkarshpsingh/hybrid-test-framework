@@ -8,11 +8,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
-
 import main.java.com.newdemo.framework.controller.ApplicationController;
 import main.java.com.newdemo.framework.controller.TestScenarioDataController;
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.xmlbeans.SystemProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,20 +39,18 @@ public class BaseSetupClass {
 	public ApplicationController App = null;
 	public Utilites commonFunctions = new Utilites();
 	public TestScenarioDataController dataController = null;
-	private ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getData=null;
+	private ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getData;
 
 	// ==========================BROWSER VARIABLES============================================
 	public static final String CHROME_DRIVER_KEY = "webdriver.chrome.driver";
 	public static final String CHROME_DRIVER_EXE = "/Lib/chromedriver.exe";
-
 	public static final String EDGE_DRIVER_KEY = "webdriver.ie.driver";
 	public static final String EDGE_DRIVER_EXE = "./Lib/ieDriverServer.exe";
-
 	public static final String FIREFOX_DRIVER_KEY = "webdriver.geckoDriver.driver";
 	public static final String FIREFOX_DRIVER_EXE = "./Lib/geckoDriver.exe";
-	private PropertiesConfiguration context;
 
 	public static ThreadLocal<WebDriver> wdriver = new ThreadLocal<WebDriver>();
+
 	public String browser = null;
 
 	WebDriver localDriver = null;
@@ -67,18 +62,6 @@ public class BaseSetupClass {
 
 	public static String downloadFilepath = null;
 	public static String jsonFilepath = null;
-
-	public Configuration getContext() {
-		return (Configuration) this.context;
-	}
-
-	public String getString(String key) {
-		return this.context.getString(key);
-	}
-
-	public String getString(String key, String defVal) {
-		return this.context.getString(key, defVal);
-	}
 
 	private HashMap<String, String> getCapabilitiesfromParams(String params) {
 		HashMap<String, String> cap = new HashMap<String, String>();
@@ -104,7 +87,6 @@ public class BaseSetupClass {
 
 		//Selenium-Grid environment-up
 		if (execute.equalsIgnoreCase("cloud")) {
-
 			try {
 				Runtime runtime = Runtime.getRuntime();
 				String filepath=System.getProperty("user.dir")+"/Config/seleniumGridUp.bat";
@@ -112,7 +94,6 @@ public class BaseSetupClass {
 				//Thread.sleep(40000);
 
 			} catch (Exception ex) {
-
 				System.err.println("Error: Selenium Grid environment fail to get UP, exception: " + ex.getMessage());
 			}
 		}
@@ -122,7 +103,7 @@ public class BaseSetupClass {
 	@BeforeTest
 	public synchronized void LaunchBrowser(String remoteUrl, String execute, String capabilities, String environment) throws Exception {
 
-		if(dataController==null){
+		if(getData==null){
 			dataController= new TestScenarioDataController();
 			getData= dataController.getDataForSheetTestData();
 		}
@@ -237,11 +218,9 @@ public class BaseSetupClass {
 	}
 
 	public ApplicationController App() {
-		
 		if (App == null) {
 			App = new ApplicationController(getDriver());
 		}
-		
 		return App;
 	}
 

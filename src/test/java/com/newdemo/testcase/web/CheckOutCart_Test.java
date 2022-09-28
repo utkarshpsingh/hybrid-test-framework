@@ -1,7 +1,7 @@
 package test.java.com.newdemo.testcase.web;
 
 import main.java.com.newdemo.framework.base.BaseSetupClass;
-import main.java.com.newdemo.framework.base.ReuseableFunctions;
+import main.java.com.newdemo.framework.base.ReusableFunctions;
 import main.java.com.newdemo.framework.pageObjects.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -12,19 +12,18 @@ import org.testng.annotations.Test;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Test
-public class CheckOutCart_Test extends BaseSetupClass
-{
+public class CheckOutCart_Test extends BaseSetupClass{
 
-	public ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getData= null;
+	public ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> getDataScript= null;
 	public WebDriver driver= null;
-	public ReuseableFunctions functions= null;
+	public ReusableFunctions functions= null;
 	HomePage homePage = null;
 
 	@BeforeMethod(alwaysRun= true)
 	public void init() throws Exception {
-		getData= getTestData();
+		getDataScript= getTestData();
 		driver= getDriver();
-		functions= new ReuseableFunctions(driver);
+		functions= new ReusableFunctions(driver);
 		homePage = PageFactory.initElements(driver, HomePage.class);
 
 	}
@@ -33,7 +32,7 @@ public class CheckOutCart_Test extends BaseSetupClass
 	public void checkOutForOneItem() throws Exception {
 				
 		String testCaseName= new Throwable().getStackTrace()[0].getMethodName().toString();
-		ConcurrentHashMap<String, Object> getScriptData= getData.get(testCaseName);
+		ConcurrentHashMap<String, Object> getScriptData= getDataScript.get(testCaseName);
 
 		App().WebLogin().loginToApplication(getScriptData.get("UserName").toString(),
 									getScriptData.get("Password").toString());
@@ -50,7 +49,7 @@ public class CheckOutCart_Test extends BaseSetupClass
 	public void addingTwoItemToCart() throws Exception {
 
 		String testCaseName= new Throwable().getStackTrace()[0].getMethodName().toString();
-		ConcurrentHashMap<String, Object> getScriptData= getData.get(testCaseName);
+		ConcurrentHashMap<String, Object> getScriptData= getDataScript.get(testCaseName);
 
 		App().WebLogin().loginToApplication(getScriptData.get("UserName").toString(),
 				getScriptData.get("Password").toString());

@@ -26,28 +26,22 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
 
-
 /**
  * @author utkarshsingh
  *
  */
-/**
- * @author utkarshsingh
- *
- */
-public class ReuseableFunctions
 
-{
+public class ReusableFunctions{
 
 	public Properties objCMPProperties = new Properties();
 	public Utilites objUtilites = new Utilites();
 	public String strErrorMsg = "";
-	public static WebDriver driver;
+
+	public WebDriver driver;
 	protected JavascriptExecutor JSExecutor;
 	public WebElement waitElement;
 	public WebDriverWait wait;
@@ -57,14 +51,12 @@ public class ReuseableFunctions
 		}
 	
 	//==============================CONSTRUCTOR FOR COMPONENT REUSABLE FUNCTIONS=================
-	public ReuseableFunctions(WebDriver objTempWebDriver) throws Exception
-	{
+	public ReusableFunctions(WebDriver objTempWebDriver) throws Exception	{
 	
 	//==========================INITIALIZE THE WEBDRIVER OBJECT INSIDE COMPONENT REUSABLE FUNCTIONS======
 	      driver = objTempWebDriver;
 	      JSExecutor = (JavascriptExecutor)driver;
 	      wait = new WebDriverWait(driver,Duration.ofSeconds(20));
-
 	}
 
 	public synchronized Boolean launchURL(String strURL) throws Exception
@@ -140,7 +132,7 @@ public class ReuseableFunctions
 	}
 	
 
-	public static boolean isAlertPresent(){
+	public boolean isAlertPresent(){
 	      try{
 	          driver.switchTo().alert();
 	          return true;
@@ -605,8 +597,7 @@ public class ReuseableFunctions
 		}
   	}
   	
-  	
-  	public static boolean switchToFrame(WebElement element){
+  	public boolean switchToFrame(WebElement element){
 	      try{
 	          driver.switchTo().frame(element);
 	          return true;
@@ -614,9 +605,8 @@ public class ReuseableFunctions
 	          return false;
 	      }
 	}
-	
-  	
-	public static boolean switchToMainFrame(){
+
+	public boolean switchToMainFrame(){
 	      try{
 	          driver.switchTo().parentFrame();
 	          return true;

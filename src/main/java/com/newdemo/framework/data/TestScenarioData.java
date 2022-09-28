@@ -86,6 +86,7 @@ public class TestScenarioData {
 
 	public synchronized ConcurrentHashMap<String, ConcurrentHashMap<String, Object>> loadTestData(String filePath, String sheetName, Object exrArg) throws IOException{
 
+		System.out.println("Started loading Test data to HashMap....!");
 		ConcurrentHashMap<String,ConcurrentHashMap<String, Object>> parentMap=
 							new ConcurrentHashMap<String,ConcurrentHashMap<String, Object>>();
 

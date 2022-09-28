@@ -10,7 +10,7 @@
 		<parameter name="capabilities"
 			value="browserName:chrome;platform:Windows 10;version:87.0;name:Response Verification With Valid Json File;build:Demo Web Full Regression PROD;resolution:1440x900" />
 		<classes>
-			<class name="com.newdemo.testcase.api.verifyResponseWithValidJsonFile" />
+			<class name="test.java.com.newdemo.testcase.api.verifyResponseWithValidJsonFile" />
 		</classes>
 	</test>
 
